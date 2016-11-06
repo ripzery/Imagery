@@ -3,7 +3,6 @@ var fs = require('fs');
 var path = require('path');
 var router = express.Router();
 
-// const authURL = picasa.getAuthURL(config);
 var getContentByNameLists = function (folder, contents) {
     var contentList = [];
     contents.forEach(function (f) {
