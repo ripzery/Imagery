@@ -38,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(subdomain('api', routes));
 app.use(subdomain('api', image));
 
-https.createServer(options, app).listen(443);
+https.createServer(options, app).listen(443, function(){
+    console.log("started !");
+});
 
 module.exports = app;
