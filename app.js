@@ -48,6 +48,7 @@ app.use(function (req, res, next) {
 
 // error handlers
 
+app.set('port', process.env.PORT || 443);
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
