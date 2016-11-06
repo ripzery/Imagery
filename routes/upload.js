@@ -23,30 +23,31 @@ function toJsonString(object) {
 }
 
 router.post('/upload', upload.array('photos', 100), function (req, res, next) {
-    res.writeHead(200, {"Content-Type": "application/json"});
-    var returnData = {
-        isSuccess: !!req.files && req.files.length > 0
-    };
-
-    if (req.files.length == 0) {
-        returnData.errorMsg = "Please upload at least 1 file"
-    } else {
-        returnData.files = req.files;
-
-        returnData.files.map(function (file) {
-            mv("public/uploads/" + file.originalname, 'public/images/' + req.body.folder + '/' + file.originalname, {mkdirp: true}, function (err) {
-                // console.log(err)
-            });
-
-            file.destination = 'images/' + req.body.folder + '/';
-            file.path = "images/" + req.body.folder + "/" + file.originalname;
-            file.fullPath = "https://api.ripzery.com/" + file.path;
-            return file
-        });
-    }
-
-    res.write(toJsonString(returnData));
-    res.end();
+    res.render('index', {title: 'Ripzery\'s API'});
+    // res.writeHead(200, {"Content-Type": "application/json"});
+    // var returnData = {
+    //     isSuccess: !!req.files && req.files.length > 0
+    // };
+    //
+    // if (req.files.length == 0) {
+    //     returnData.errorMsg = "Please upload at least 1 file"
+    // } else {
+    //     returnData.files = req.files;
+    //
+    //     returnData.files.map(function (file) {
+    //         mv("public/uploads/" + file.originalname, 'public/images/' + req.body.folder + '/' + file.originalname, {mkdirp: true}, function (err) {
+    //             // console.log(err)
+    //         });
+    //
+    //         file.destination = 'images/' + req.body.folder + '/';
+    //         file.path = "images/" + req.body.folder + "/" + file.originalname;
+    //         file.fullPath = "https://api.ripzery.com/" + file.path;
+    //         return file
+    //     });
+    // }
+    //
+    // res.write(toJsonString(returnData));
+    // res.end();
 });
 
 module.exports = router;
