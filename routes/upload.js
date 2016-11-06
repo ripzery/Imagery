@@ -40,7 +40,7 @@ router.post('/upload', upload.array('photos', 100), function (req, res, next) {
 
             file.destination = 'images/' + req.body.folder + '/';
             file.path = "images/" + req.body.folder + "/" + file.originalname;
-            file.fullPath = "http://blog.ripzery.com:3000/" + file.path;
+            file.fullPath = "https://api.ripzery.com/" + file.path;
             return file
         });
     }
