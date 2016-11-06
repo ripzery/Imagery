@@ -24,6 +24,9 @@ var options = {
     cert: fs.readFileSync('fullchain.pem')
 };
 
+// Create an HTTPS service identical to the HTTP service.
+https.createServer(options, app).listen(443);
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cors());
@@ -66,8 +69,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-// Create an HTTPS service identical to the HTTP service.
-https.createServer(options, app).listen(443);
 
 module.exports = app;
