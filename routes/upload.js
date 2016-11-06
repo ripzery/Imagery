@@ -22,7 +22,7 @@ function toJsonString(object) {
     return JSON.stringify(object);
 }
 
-router.get('/upload', upload.array('photos', 100), function (req, res, next) {
+router.post('/upload', upload.array('photos', 100), function (req, res, next) {
     res.writeHead(200, {"Content-Type": "application/json"});
     var returnData = {
         isSuccess: !!req.files && req.files.length > 0
