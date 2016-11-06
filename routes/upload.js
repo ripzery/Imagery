@@ -23,7 +23,7 @@ function toJsonString(object) {
 }
 
 router.post('/upload', upload.array('photos', 100), function (req, res, next) {
-    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.writeHead(200, {'Content-Type': 'application/json','Access-Control-Allow-Origin', 'https://ripzery.me/*'});
     var returnData = {
         isSuccess: !!req.files && req.files.length > 0
     };
