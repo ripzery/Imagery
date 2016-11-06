@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 const routes = require('./routes/index');
-var image = require('./routes/upload');
+const image = require('./routes/upload');
 
 var app = express();
 
@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(subdomain('api', routes));
 app.use(subdomain('api', image));
+app.use(subdomain('api', routes));
 
 https.createServer(options, app).listen(3002, function(){
     console.log("started !");
