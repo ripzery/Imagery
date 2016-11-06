@@ -1,3 +1,4 @@
+var subdomain = require('express-subdomain');
 var express = require('express');
 var path = require('path');
 var https = require('https');
@@ -18,10 +19,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // This line is from the Node.js HTTPS documentation.
-// var options = {
-//     key: fs.readFileSync('/etc/letsencrypt/live/ripzery.me/privkey.pem'),
-//     cert: fs.readFileSync('/etc/letsencrypt/live/ripzery.me/fullchain.pem')
-// };
+var options = {
+    key: fs.readFileSync('privkey.pem'),
+    cert: fs.readFileSync('fullchain.pem')
+};
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -32,9 +33,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/imagery/', routes);
-app.use('/imagery/', image);
-
+app.use(subdomain('api', routes));
+app.use(subdomain('api', image));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -68,6 +68,6 @@ app.use(function (err, req, res, next) {
 });
 
 // Create an HTTPS service identical to the HTTP service.
-// https.createServer(options, app).listen(443);
+https.createServer(options, app).listen(443);
 
 module.exports = app;
