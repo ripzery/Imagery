@@ -22,7 +22,7 @@ function toJsonString(object) {
     return JSON.stringify(object);
 }
 
-router.post('/upload', upload.array('photos', 100), function (req, res, next) {
+router.get('/upload', upload.array('photos', 100), function (req, res, next) {
     res.render('index', {title: 'Ripzery\'s API'});
     // res.writeHead(200, {"Content-Type": "application/json"});
     // var returnData = {
