@@ -1,4 +1,3 @@
-var subdomain = require('express-subdomain');
 var express = require('express');
 var path = require('path');
 var https = require('https');
