@@ -19,13 +19,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // This line is from the Node.js HTTPS documentation.
-var options = {
-    key: fs.readFileSync('privkey.pem'),
-    cert: fs.readFileSync('fullchain.pem')
-};
+// var options = {
+//     key: fs.readFileSync('privkey.pem'),
+//     cert: fs.readFileSync('fullchain.pem')
+// };
 
 // Create an HTTPS service identical to the HTTP service.
-https.createServer(options, app).listen(443);
+// https.createServer(options, app).listen(443);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
