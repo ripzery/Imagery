@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(subdomain('api', image));
-app.use(subdomain('api', routes));
+app.use("/", image);
+app.use('/', routes);
 
 https.createServer(options, app).listen(3002, function(){
     console.log("started !");
