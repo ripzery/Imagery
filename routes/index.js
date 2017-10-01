@@ -6,7 +6,7 @@ var router = express.Router();
 var getContentByNameLists = function (folder, contents) {
     var contentList = [];
     contents.forEach(function (f) {
-        contentList.push({name: f});
+        contentList.push({ name: f });
     });
 
     var contentContainer = {
@@ -23,7 +23,7 @@ var getCoverFromContents = function (folder, contents) {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Ripzery\'s API'});
+    res.render('index', { title: 'Ripzery\'s API' });
 });
 
 router.get('/images', function (req, res, next) {
@@ -48,17 +48,19 @@ router.get('/images', function (req, res, next) {
 });
 
 router.post('/getTypes', function (req, res, next) {
-    var availableDirs = getDirectories(__dirname + '/../public/images');
+    console.log(req.body.env)
+    var environment = req.body.env == "mock" ? "mocks" : "images"
+    var availableDirs = getDirectories(__dirname + '/../public/' + environment);
     var folderList = [];
     var cover = "";
     availableDirs.forEach(function (f) {
-        fs.readdir(__dirname + '/../public/images/' + f, function (error, contents) {
+        fs.readdir(__dirname + '/../public/' + environment + "/" + f, function (error, contents) {
             cover = getCoverFromContents(f, contents);
-            folderList.push({name: f, cover: cover});
+            folderList.push({ name: f, cover: cover });
 
             if (folderList.length == availableDirs.length) {
-                var returnData = JSON.stringify({"folders": folderList});
-                res.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"});
+                var returnData = JSON.stringify({ "folders": folderList });
+                res.writeHead(200, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
                 res.write(returnData);
                 res.end();
             }
